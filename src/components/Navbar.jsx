@@ -70,7 +70,9 @@ const ThemeToggle = styled.button`
   padding: 0.5rem;
   display: flex;
   align-items: center;
+  justify-content: center;
   font-size: 1.2rem;
+  height: 40px;
 `;
 
 const MobileMenuButton = styled.button`
@@ -78,12 +80,24 @@ const MobileMenuButton = styled.button`
   background: none;
   border: none;
   color: ${props => props.theme.text};
-  font-size: 1.5rem;
   cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   
   @media (max-width: 768px) {
-    display: block;
+    display: flex;
   }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  height: 40px;
 `;
 
 const MobileMenu = styled.div`
@@ -200,14 +214,14 @@ const Navbar = ({ theme, toggleTheme }) => {
             Contact
           </NavLink>
         </NavLinks>
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <ButtonContainer>
           <ThemeToggle onClick={toggleTheme}>
             {theme === 'light' ? <FiMoon /> : <FiSun />}
           </ThemeToggle>
           <MobileMenuButton onClick={toggleMenu}>
             {isMenuOpen ? <FiX /> : <FiMenu />}
           </MobileMenuButton>
-        </div>
+        </ButtonContainer>
       </NavContainer>
       <MobileMenu isOpen={isMenuOpen}>
         <MobileNavLink 
