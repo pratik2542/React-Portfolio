@@ -76,7 +76,6 @@ const ThemeToggle = styled.button`
 `;
 
 const MobileMenuButton = styled.button`
-  display: none;
   background: none;
   border: none;
   color: ${props => props.theme.text};
@@ -84,9 +83,9 @@ const MobileMenuButton = styled.button`
   padding: 0.5rem;
   font-size: 1.2rem;
   height: 40px;
-  display: flex;
   align-items: center;
   justify-content: center;
+  display: none;
   
   @media (max-width: 768px) {
     display: flex;
