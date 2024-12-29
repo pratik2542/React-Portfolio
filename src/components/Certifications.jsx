@@ -70,7 +70,7 @@ const certifications = [
     title: "Python Begginer and Advanced",
     issuer: "Udemy",
     date: "2019",
-    link: "https://drive.google.com/drive/u/0/folders/1jsm3d9nCJs19tZFtZcguZCNBShSBxBEg"
+    link: "https://drive.google.com/file/d/1B9lABWYyIHqQBNMGujMhW2NL10-BkCIX/view?usp=sharing"
   },
   {
     title: "Python with machine learning",
@@ -88,7 +88,7 @@ const certifications = [
     title: "Post-Graduation Degree",
     issuer: "Centennial College",
     date: "2023",
-    link: " https://drive.google.com/drive/u/0/folders/1jsm3d9nCJs19tZFtZcguZCNBShSBxBEg"
+    link: "https://drive.google.com/file/d/16H29sc4Aq_0kjtWIwPcFaaOX5ET_BwBC/view?usp=sharing"
   }
  
 ];
