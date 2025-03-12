@@ -1,15 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-scroll';
 import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
-import { keyframes } from '@emotion/react';
-import WhatsNew from './WhatsNew';
-
-const blink = keyframes`
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
-`;
 
 const Nav = styled.nav`
   position: fixed;
@@ -67,25 +59,6 @@ const NavLink = styled(Link)`
       height: 2px;
       background: ${props => props.theme.primary};
     }
-  }
-`;
-
-const WhatsNewButton = styled.button`
-  background: ${props => props.theme.primary};
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.85rem;
-  animation: ${blink} 2s infinite;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: ${props => props.theme.hover};
-    animation: none;
-    transform: translateY(-2px);
   }
 `;
 
@@ -163,36 +136,8 @@ const MobileNavLink = styled(Link)`
   }
 `;
 
-const MobileWhatsNewButton = styled(WhatsNewButton)`
-  width: 100%;
-  text-align: center;
-  padding: 0.75rem;
-  margin-top: 0.5rem;
-  display: flex;
-  justify-content: center;
-  font-size: 1rem;
-`;
-
 const Navbar = ({ theme, toggleTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(() => {
-    // Check if the user has seen the modal today
-    const lastSeenDate = localStorage.getItem('whatsNewLastSeen');
-    const today = new Date().toDateString();
-    
-    // If they haven't seen it today or never seen it, show it
-    if (!lastSeenDate || lastSeenDate !== today) {
-      const timer = setTimeout(() => {
-        setIsModalOpen(true);
-        // Store today's date so we only show once per day
-        localStorage.setItem('whatsNewLastSeen', today);
-      }, 1500);
-      
-      return () => clearTimeout(timer);
-    }
-  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -202,166 +147,151 @@ const Navbar = ({ theme, toggleTheme }) => {
     setIsMenuOpen(false);
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
-    closeMenu();
-  };
-
   return (
-    <>
-      <Nav>
-        <NavContainer>
-          <Logo>PM</Logo>
-          <NavLinks>
-            <NavLink 
-              to="home" 
-              smooth={true} 
-              duration={500}
-              spy={true}
-              activeClass="active"
-              offset={-70}
-            >
-              Home
-            </NavLink>
-            <NavLink 
-              to="about" 
-              smooth={true} 
-              duration={500}
-              spy={true}
-              activeClass="active"
-              offset={-70}
-            >
-              About
-            </NavLink>
-            <NavLink 
-              to="certifications" 
-              smooth={true} 
-              duration={500}
-              spy={true}
-              activeClass="active"
-              offset={-70}
-            >
-              Certifications
-            </NavLink>
-            <NavLink 
-              to="internships" 
-              smooth={true} 
-              duration={500}
-              spy={true}
-              activeClass="active"
-              offset={-70}
-            >
-              Experience
-            </NavLink>
-            <NavLink 
-              to="projects" 
-              smooth={true} 
-              duration={500}
-              spy={true}
-              activeClass="active"
-              offset={-70}
-            >
-              Projects
-            </NavLink>
-            <NavLink 
-              to="contact" 
-              smooth={true} 
-              duration={500}
-              spy={true}
-              activeClass="active"
-              offset={-70}
-            >
-              Contact
-            </NavLink>
-            <WhatsNewButton onClick={openModal}>
-              What's New
-            </WhatsNewButton>
-          </NavLinks>
-          <ButtonContainer>
-            <ThemeToggle onClick={toggleTheme}>
-              {theme === 'light' ? <FiMoon /> : <FiSun />}
-            </ThemeToggle>
-            <MobileMenuButton onClick={toggleMenu}>
-              {isMenuOpen ? <FiX /> : <FiMenu />}
-            </MobileMenuButton>
-          </ButtonContainer>
-        </NavContainer>
-        <MobileMenu isOpen={isMenuOpen}>
-          <MobileNavLink 
+    <Nav>
+      <NavContainer>
+        <Logo>PM</Logo>
+        <NavLinks>
+          <NavLink 
             to="home" 
             smooth={true} 
-            duration={500} 
-            onClick={closeMenu}
+            duration={500}
             spy={true}
             activeClass="active"
             offset={-70}
           >
             Home
-          </MobileNavLink>
-          <MobileNavLink 
+          </NavLink>
+          <NavLink 
             to="about" 
             smooth={true} 
-            duration={500} 
-            onClick={closeMenu}
+            duration={500}
             spy={true}
             activeClass="active"
             offset={-70}
           >
             About
-          </MobileNavLink>
-          <MobileNavLink 
+          </NavLink>
+          <NavLink 
             to="certifications" 
             smooth={true} 
-            duration={500} 
-            onClick={closeMenu}
+            duration={500}
             spy={true}
             activeClass="active"
             offset={-70}
           >
             Certifications
-          </MobileNavLink>
-          <MobileNavLink 
+          </NavLink>
+          <NavLink 
             to="internships" 
             smooth={true} 
-            duration={500} 
-            onClick={closeMenu}
+            duration={500}
             spy={true}
             activeClass="active"
             offset={-70}
           >
             Experience
-          </MobileNavLink>
-          <MobileNavLink 
+          </NavLink>
+          <NavLink 
             to="projects" 
             smooth={true} 
-            duration={500} 
-            onClick={closeMenu}
+            duration={500}
             spy={true}
             activeClass="active"
             offset={-70}
           >
             Projects
-          </MobileNavLink>
-          <MobileNavLink 
+          </NavLink>
+          <NavLink 
             to="contact" 
             smooth={true} 
-            duration={500} 
-            onClick={closeMenu}
+            duration={500}
             spy={true}
             activeClass="active"
             offset={-70}
           >
             Contact
-          </MobileNavLink>
-          <MobileWhatsNewButton onClick={openModal}>
-            What's New
-          </MobileWhatsNewButton>
-        </MobileMenu>
-      </Nav>
-      
-      <WhatsNew isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-    </>
+          </NavLink>
+        </NavLinks>
+        <ButtonContainer>
+          <ThemeToggle onClick={toggleTheme}>
+            {theme === 'light' ? <FiMoon /> : <FiSun />}
+          </ThemeToggle>
+          <MobileMenuButton onClick={toggleMenu}>
+            {isMenuOpen ? <FiX /> : <FiMenu />}
+          </MobileMenuButton>
+        </ButtonContainer>
+      </NavContainer>
+      <MobileMenu isOpen={isMenuOpen}>
+        <MobileNavLink 
+          to="home" 
+          smooth={true} 
+          duration={500} 
+          onClick={closeMenu}
+          spy={true}
+          activeClass="active"
+          offset={-70}
+        >
+          Home
+        </MobileNavLink>
+        <MobileNavLink 
+          to="about" 
+          smooth={true} 
+          duration={500} 
+          onClick={closeMenu}
+          spy={true}
+          activeClass="active"
+          offset={-70}
+        >
+          About
+        </MobileNavLink>
+        <MobileNavLink 
+          to="certifications" 
+          smooth={true} 
+          duration={500} 
+          onClick={closeMenu}
+          spy={true}
+          activeClass="active"
+          offset={-70}
+        >
+          Certifications
+        </MobileNavLink>
+        <MobileNavLink 
+          to="internships" 
+          smooth={true} 
+          duration={500} 
+          onClick={closeMenu}
+          spy={true}
+          activeClass="active"
+          offset={-70}
+        >
+          Experience
+        </MobileNavLink>
+        <MobileNavLink 
+          to="projects" 
+          smooth={true} 
+          duration={500} 
+          onClick={closeMenu}
+          spy={true}
+          activeClass="active"
+          offset={-70}
+        >
+          Projects
+        </MobileNavLink>
+        <MobileNavLink 
+          to="contact" 
+          smooth={true} 
+          duration={500} 
+          onClick={closeMenu}
+          spy={true}
+          activeClass="active"
+          offset={-70}
+        >
+          Contact
+        </MobileNavLink>
+      </MobileMenu>
+    </Nav>
   );
 };
 
-export default Navbar;
+export default Navbar; 
