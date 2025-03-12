@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
-// We'll remove react-helmet for now
+import { ReactTyped } from 'react-typed';
 
 const HomeSection = styled.section`
   min-height: 100vh;
@@ -48,10 +48,14 @@ const Subtitle = styled(motion.p)`
   opacity: 0.8;
 `;
 
+const TypingText = styled.span`
+  color: ${props => props.theme.accent};
+  font-weight: bold;
+`;
+
 const Home = () => {
-  // We'll update the document title using the regular method
   React.useEffect(() => {
-    document.title = "Pratiksinh Makwana | Software Engineer & AI and Machine learning enthusiast";
+    document.title = "Pratiksinh Makwana | Software Engineer & AI Enthusiast";
   }, []);
 
   return (
@@ -62,14 +66,34 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          Pratiksinh Makwana
+          Hello, I'm Pratiksinh Makwana
         </Title>
         <Subtitle
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Software engineer | AI & Data science | Machine Learning Enthusiast | Post-graduation in AI | Bachlor of Technology in Computer Science
+          I am a <TypingText>
+            <ReactTyped
+              strings={[
+                "Software Engineer",
+                "AI and Data Science Enthusiast",
+                "Machine Learning Practitioner",
+                "Tech Explorer",
+                "PowerApps Developer",
+                "Full Stack Developer",
+                "Cloud Computing Enthusiast",
+                "Data Analyst",
+                "Web Developer",
+                "Database Administrator",
+                "Power BI Developer",
+                "PowerPlatform Automation Developer"
+              ]}
+              typeSpeed={50}
+              backSpeed={30}
+              loop
+            />
+          </TypingText>
         </Subtitle>
       </Content>
     </HomeSection>
