@@ -9,6 +9,7 @@ import Internships from './components/Internships';
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import MobileFooter from './components/MobileFooter';
 import GlobalStyles from './GlobalStyles';
 
 function App() {
@@ -29,8 +30,9 @@ function App() {
       <Projects />
       <Contact />
       <Footer />
+      <MobileFooter />
     </ThemeProvider>
   );
 }
 
-export default App; 
+export default App;

@@ -1,30 +1,52 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { FiGithub, FiLinkedin, FiMail, FiTwitter  } from 'react-icons/fi';
+import { FaLinkedin, FaGithub, FaEnvelope, FaTwitter } from 'react-icons/fa';
 
-const FooterSection = styled.footer`
+const FooterContainer = styled.footer`
   padding: 2rem;
-  background: ${props => props.theme.card};
+  background: ${props => props.theme.background};
+  border-top: 1px solid ${props => props.theme.border};
   color: ${props => props.theme.text};
+  
+  /* Fixed footer styles for desktop */
+  @media (min-width: 769px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 2rem;
+    z-index: 900;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Hide on mobile since we have the mobile footer */
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
 
-const Container = styled.div`
+const FooterContent = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
+`;
+
+const Copyright = styled.p`
+  font-size: 0.9rem;
+  opacity: 0.8;
 `;
 
 const SocialLinks = styled.div`
   display: flex;
-  gap: 2rem;
+  align-items: center;
+  gap: 1.5rem;
 `;
 
-const SocialLink = styled.a`
+const SocialIcon = styled.a`
   color: ${props => props.theme.text};
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   transition: color 0.3s ease;
   
   &:hover {
@@ -32,53 +54,48 @@ const SocialLink = styled.a`
   }
 `;
 
-const Copyright = styled.p`
-  text-align: center;
-  opacity: 0.8;
-`;
-
 const Footer = () => {
+  const year = new Date().getFullYear();
+  
   return (
-    <FooterSection>
-      <Container>
+    <FooterContainer>
+      <FooterContent>
+        <Copyright>© {year} Pratiksinh Makwana. All rights reserved.</Copyright>
         <SocialLinks>
-          <SocialLink 
+          <SocialIcon 
+            href="https://www.linkedin.com/in/pratiksinh-makwana-43488a189/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <FaLinkedin />
+          </SocialIcon>
+          <SocialIcon 
             href="https://github.com/pratik2542" 
             target="_blank" 
             rel="noopener noreferrer"
             aria-label="GitHub"
           >
-            <FiGithub />
-          </SocialLink>
-          <SocialLink 
-            href="https://www.linkedin.com/in/pratiksinh-makwana-43488a189" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
+            <FaGithub />
+          </SocialIcon>
+          <SocialIcon 
+            href="mailto:pratikmak2542@gmail.com"
+            aria-label="Email"
           >
-            <FiLinkedin />
-          </SocialLink>
-          <SocialLink 
+            <FaEnvelope />
+          </SocialIcon>
+          <SocialIcon 
             href="https://x.com/pratik2542"
             target="_blank"
             rel="noopener noreferrer" 
             aria-label="X (Twitter)"
           >
-            <FiTwitter />
-          </SocialLink>
-          <SocialLink 
-            href="mailto:pratikmak2542@gmail.com"
-            aria-label="Email"
-          >
-            <FiMail />
-          </SocialLink>
+            <FaTwitter />
+          </SocialIcon>
         </SocialLinks>
-        <Copyright>
-          © {new Date().getFullYear()} Pratiksinh Makwana.
-        </Copyright>
-      </Container>
-    </FooterSection>
+      </FooterContent>
+    </FooterContainer>
   );
 };
 
-export default Footer; 
+export default Footer;

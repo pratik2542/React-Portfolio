@@ -9,6 +9,7 @@ const HomeSection = styled.section`
   justify-content: center;
   padding: 2rem;
   background: ${props => props.theme.background};
+  position: relative;
 `;
 
 const Content = styled.div`
@@ -56,4 +57,4 @@ const Home = () => {
   );
 };
 
-export default Home; 
+export default Home;

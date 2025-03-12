@@ -99,7 +99,7 @@ const About = () => {
               <SkillItem>AI/ML: TensorFlow, Pandas, Keras, PyTorch, Scikit-Learn</SkillItem>
               <SkillItem>Cloud: AWS, GCP, Azure, Docker, Kubernetes</SkillItem>
               <SkillItem>Frameworks: Node.js, React.js, Express.js, Django</SkillItem>
-              <SkillItem>Tools & DB: GIT, JIRA, MongoDB, MySQL, DynamoDB</SkillItem>
+              <SkillItem>Tools & DB: GIT, JIRA, MongoDB, MySQL, DynamoDB, Firebase</SkillItem>
             </SkillsList>
           </SkillsContainer>
 
