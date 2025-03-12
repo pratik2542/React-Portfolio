@@ -2,30 +2,34 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <!-- <link rel="icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" /> -->
-    
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
     
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Pratiksinh Makwana - Software Engineer and AI and Machine learning enthusiast. Explore my portfolio showcasing expertise in AI, Data Science, Machine Learning, and Software Engineering." />
+    <meta name="keywords" content="Pratiksinh Makwana, Software Engineer, AI Developer, Machine Learning Engineer, Data Scientist, React Developer, Portfolio" />
+    <meta name="author" content="Pratiksinh Makwana" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pratiksinh.makwana.vercel.app/" />
+    <meta property="og:title" content="Pratiksinh Makwana | Software Engineer & AI and Machine learning enthusiast" />
+    <meta property="og:description" content="Explore my portfolio showcasing expertise in AI, Data Science, Machine Learning, and Software Engineering." />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://pratiksinh.makwana.vercel.app/" />
+    <meta property="twitter:title" content="Pratiksinh Makwana | Software Engineer & AI and Machine learning enthusiast" />
+    <meta property="twitter:description" content="Explore my portfolio showcasing expertise in AI, Data Science, Machine Learning, and Software Engineering." />
+    <meta property="twitter:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://pratiksinh.makwana.vercel.app/" />
+    
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -10 100 100'><text x='50%' y='50%' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold' font-size='70' fill='%23808080'>PM</text></svg>" />
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GF0ESVX764"></script>
     <script>
@@ -33,24 +37,45 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'G-GF0ESVX764');
+      gtag('config', 'G-GF0ESVX764', { 'anonymize_ip': true });
     </script>
-    <!-- ...existing code... -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 -10 100 100'><text x='50%' y='50%' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold' font-size='70' fill='%23808080'>PM</text></svg>" />
-    <title>Pratik's Portfolio</title>
+    
+    <title>Pratiksinh Makwana | Software Engineer & AI and Machine learning enthusiast</title>
+    
+    <!-- JSON-LD for SEO -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org/",
+        "@type": "Person",
+        "name": "Pratiksinh Makwana",
+        "url": "https://pratiksinh.makwana.vercel.app/",
+        "image": "",
+        "jobTitle": "Software Engineer",
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Ddrops Company"
+        },
+        "alumniOf": [
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Centennial College"
+          },
+          {
+            "@type": "CollegeOrUniversity",
+            "name": "Indus University"
+          }
+        ],
+        "knowsAbout": ["Software Engineering", "Artificial Intelligence", "Machine Learning", "Data Science", "React", "Python"],
+        "sameAs": [
+          "https://www.linkedin.com/in/pratiksinh-makwana-43488a189/",
+          "https://github.com/pratik2542",
+          "https://x.com/pratik2542"
+        ]
+      }
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>

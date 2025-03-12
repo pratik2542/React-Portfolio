@@ -11,18 +11,16 @@ const fadeIn = keyframes`
 
 const ButtonContainer = styled.div`
   position: fixed;
-  bottom: ${props => props.isMobile ? '90px' : '70px'}; /* Adjusted to be just above footer on mobile */
+  bottom: 70px;
   right: 20px;
   opacity: ${props => props.visible ? 1 : 0};
   transition: opacity 0.3s ease;
   animation: ${fadeIn} 0.3s ease;
   z-index: 900;
-
+  
+  /* Hide on mobile */
   @media (max-width: 768px) {
-    bottom: 90px; /* Position just above the mobile footer */
-    left: 50%; /* Center horizontally */
-    transform: translateX(-50%); /* Ensure perfect centering */
-    right: auto; /* Reset right position */
+    display: none;
   }
 `;
 
@@ -34,8 +32,8 @@ const ScrollButton = styled.button`
   color: ${props => props.theme.primary};
   border: 2px solid ${props => props.theme.primary};
   border-radius: 50%;
-  width: ${props => props.isMobile ? '36px' : '40px'};
-  height: ${props => props.isMobile ? '36px' : '40px'};
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease;
@@ -50,27 +48,10 @@ const ScrollButton = styled.button`
   &:active {
     transform: translateY(-1px);
   }
-  
-  @media (max-width: 768px) {
-    width: 36px;
-    height: 36px;
-    font-size: 0.9rem;
-  }
 `;
 
-const ScrollToTop = ({ showWhatsNew }) => {
+const ScrollToTop = () => {
   const [visible, setVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Check if on mobile
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // Show button after scrolling down
   useEffect(() => {
@@ -93,8 +74,8 @@ const ScrollToTop = ({ showWhatsNew }) => {
   };
 
   return visible ? (
-    <ButtonContainer visible={visible} isMobile={isMobile} showWhatsNew={showWhatsNew}>
-      <ScrollButton onClick={scrollToTop} aria-label="Scroll to top" isMobile={isMobile}>
+    <ButtonContainer visible={visible}>
+      <ScrollButton onClick={scrollToTop} aria-label="Scroll to top">
         <FiArrowUp />
       </ScrollButton>
     </ButtonContainer>

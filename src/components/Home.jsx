@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
+// We'll remove react-helmet for now
 
 const HomeSection = styled.section`
   min-height: 100vh;
@@ -48,6 +49,11 @@ const Subtitle = styled(motion.p)`
 `;
 
 const Home = () => {
+  // We'll update the document title using the regular method
+  React.useEffect(() => {
+    document.title = "Pratiksinh Makwana | Software Engineer & AI and Machine learning enthusiast";
+  }, []);
+
   return (
     <HomeSection id="home">
       <Content>
