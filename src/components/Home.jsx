@@ -10,11 +10,24 @@ const HomeSection = styled.section`
   padding: 2rem;
   background: ${props => props.theme.background};
   position: relative;
+  padding-top: 0; /* Remove extra padding at the top */
+  
+  @media (max-width: 768px) {
+    padding-top: 0;
+    align-items: flex-start; /* Align to top on mobile */
+    padding-top: 20vh; /* Add space from top as percentage of viewport */
+  }
 `;
 
 const Content = styled.div`
   text-align: center;
   max-width: 800px;
+  margin-top: -70px; /* Adjust for the fixed header to center properly */
+  
+  @media (max-width: 768px) {
+    margin-top: 0; /* Remove negative margin on mobile */
+    padding-top: 0;
+  }
 `;
 
 const Title = styled(motion.h1)`

@@ -20,6 +20,7 @@ const GlobalStyles = () => (
         
         @media (max-width: 768px) {
           padding-bottom: 70px; /* Space for the mobile fixed footer */
+          padding-top: 50px; /* Reduced space for header on mobile */
         }
         
         @media (min-width: 769px) {
@@ -29,6 +30,12 @@ const GlobalStyles = () => (
 
       html {
         scroll-behavior: smooth;
+      }
+
+      #root {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
       }
     `}
   />

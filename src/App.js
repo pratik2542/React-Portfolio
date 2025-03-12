@@ -10,6 +10,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import MobileFooter from './components/MobileFooter';
+import ScrollToTop from './components/ScrollToTop';
 import GlobalStyles from './GlobalStyles';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
       <Contact />
       <Footer />
       <MobileFooter />
+      <ScrollToTop showWhatsNew={true} />
     </ThemeProvider>
   );
 }
