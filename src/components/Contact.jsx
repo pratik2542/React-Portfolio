@@ -26,16 +26,41 @@ const Form = styled(motion.form)`
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+  }
 `;
 
 const FormGroup = styled.div`
   margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  
+  &:focus-within::after {
+    width: 100%;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: ${props => props.theme.primary};
+    transition: width 0.3s ease;
+  }
 `;
 
 const Label = styled.label`
   display: block;
-  color: ${props => props.theme.text};
+  color: ${props => props.isFocused ? props.theme.primary : props.theme.text};
   margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  transform: ${props => props.isFocused ? 'translateX(5px)' : 'none'};
 `;
 
 const Input = styled.input`
@@ -45,9 +70,15 @@ const Input = styled.input`
   border-radius: 5px;
   background: ${props => props.theme.background};
   color: ${props => props.theme.text};
+  transition: all 0.3s ease;
   
   &:focus {
     outline: none;
+    border-color: ${props => props.theme.primary};
+    box-shadow: 0 0 0 3px ${props => props.theme.primary}30;
+  }
+  
+  &:hover {
     border-color: ${props => props.theme.primary};
   }
 `;
@@ -61,9 +92,15 @@ const TextArea = styled.textarea`
   color: ${props => props.theme.text};
   min-height: 150px;
   resize: vertical;
+  transition: all 0.3s ease;
   
   &:focus {
     outline: none;
+    border-color: ${props => props.theme.primary};
+    box-shadow: 0 0 0 3px ${props => props.theme.primary}30;
+  }
+  
+  &:hover {
     border-color: ${props => props.theme.primary};
   }
 `;
@@ -77,6 +114,27 @@ const Button = styled(motion.button)`
   cursor: pointer;
   font-size: 1rem;
   width: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.5s ease;
+  }
+  
+  &:hover:not(:disabled)::before {
+    width: 300px;
+    height: 300px;
+  }
   
   &:disabled {
     opacity: 0.7;
@@ -89,6 +147,15 @@ const Message = styled.div`
   padding: 1rem;
   border-radius: 5px;
   text-align: center;
+  transition: all 0.3s ease;
+  transform: translateY(10px);
+  animation: slideIn 0.3s forwards;
+  
+  @keyframes slideIn {
+    to {
+      transform: translateY(0);
+    }
+  }
   
   ${props => props.type === 'success' && `
     background: #d1fae5;
@@ -109,6 +176,7 @@ const Contact = () => {
   });
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
+  const [focusedField, setFocusedField] = useState(null);
 
   useEffect(() => {
     emailjs.init(process.env.REACT_APP_EMAILJS_PUBLIC_KEY);
@@ -119,6 +187,14 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleFocus = (field) => {
+    setFocusedField(field);
+  };
+
+  const handleBlur = () => {
+    setFocusedField(null);
   };
 
   const handleSubmit = async (e) => {
@@ -169,31 +245,37 @@ const Contact = () => {
           viewport={{ once: true }}
         >
           <FormGroup>
-            <Label>Name</Label>
+            <Label isFocused={focusedField === 'name'}>Name</Label>
             <Input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
+              onFocus={() => handleFocus('name')}
+              onBlur={handleBlur}
               required
             />
           </FormGroup>
           <FormGroup>
-            <Label>Email</Label>
+            <Label isFocused={focusedField === 'email'}>Email</Label>
             <Input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
+              onFocus={() => handleFocus('email')}
+              onBlur={handleBlur}
               required
             />
           </FormGroup>
           <FormGroup>
-            <Label>Message</Label>
+            <Label isFocused={focusedField === 'message'}>Message</Label>
             <TextArea
               name="message"
               value={formData.message}
               onChange={handleChange}
+              onFocus={() => handleFocus('message')}
+              onBlur={handleBlur}
               required
             />
           </FormGroup>
@@ -217,4 +299,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;

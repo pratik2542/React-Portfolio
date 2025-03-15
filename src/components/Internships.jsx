@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { motion } from 'framer-motion';
+import { FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 const ExperienceSection = styled.section`
   min-height: 100vh;
@@ -20,9 +21,9 @@ const Title = styled(motion.h2)`
   text-align: center;
 `;
 
+// Desktop timeline styling
 const Timeline = styled.div`
   position: relative;
-  max-width: 800px;
   margin: 0 auto;
   
   &::after {
@@ -34,24 +35,111 @@ const Timeline = styled.div`
     bottom: 0;
     left: 50%;
     margin-left: -1px;
-    
-    @media (max-width: 768px) {
-      left: 31px;
-    }
+  }
+  
+  @media (max-width: 768px) {
+    display: none; /* Hide timeline on mobile */
   }
 `;
 
 const ExperienceCard = styled(motion.div)`
-  padding: 20px 40px;
   position: relative;
-  width: calc(50% - 40px);
+  width: 65%;
   margin-bottom: 50px;
+  margin-top: 50px;
+  clear: both;
   
-  ${props => props.position === 'left' ? 'left: 0;' : 'left: 50%;'}
+  ${props => 
+    props.position === 'left' 
+      ? `
+        float: left;
+        padding-right: 220px;
+      ` 
+      : `
+        float: right;
+        padding-left: 220px;
+      `
+  }
   
   @media (max-width: 768px) {
-    width: calc(100% - 80px);
-    left: 60px;
+    display: none; /* Hide default cards on mobile */
+  }
+`;
+
+// Mobile-specific styling
+const MobileExperienceContainer = styled.div`
+  display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+  
+  @media (max-width: 768px) {
+    display: flex;
+  }
+`;
+
+const MobileCard = styled(motion.div)`
+  background: ${props => props.theme.card};
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+`;
+
+const MobileCardHeader = styled.div`
+  background: ${props => props.theme.primary};
+  color: white;
+  padding: 1rem;
+  position: relative;
+`;
+
+const MobileCompany = styled.h3`
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+`;
+
+const MobilePosition = styled.h4`
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.9;
+`;
+
+const MobileCardContent = styled.div`
+  padding: 1rem;
+`;
+
+const MobileInfoRow = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  color: ${props => props.theme.text};
+  opacity: 0.8;
+  font-size: 0.85rem;
+  
+  & > svg {
+    margin-right: 0.5rem;
+    min-width: 16px;
+    color: ${props => props.theme.primary};
+  }
+`;
+
+const MobileDescription = styled.ul`
+  color: ${props => props.theme.text};
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+`;
+
+const MobileDescriptionItem = styled.li`
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  position: relative;
+  
+  &:before {
+    content: "▹";
+    color: ${props => props.theme.primary};
+    position: absolute;
+    left: 0;
   }
 `;
 
@@ -60,22 +148,46 @@ const CardContent = styled.div`
   background: ${props => props.theme.card};
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1.25rem; /* Slightly less padding on mobile */
+  }
 `;
 
 const Company = styled.h3`
   color: ${props => props.theme.primary};
   margin-bottom: 0.5rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1.1rem; /* Slightly smaller on mobile */
+  }
 `;
 
 const Position = styled.h4`
   color: ${props => props.theme.text};
   margin-bottom: 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 0.5rem; /* Less margin on mobile */
+  }
 `;
 
 const Duration = styled.p`
   color: ${props => props.theme.text};
   opacity: 0.8;
   margin-bottom: 1rem;
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const Description = styled.ul`
@@ -90,6 +202,10 @@ const DescriptionItem = styled.li`
     content: "▹";
     color: ${props => props.theme.primary};
     margin-right: 0.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
   }
 `;
 
@@ -152,6 +268,8 @@ const Internships = () => {
         >
           Experience
         </Title>
+        
+        {/* Desktop Timeline */}
         <Timeline>
           {experiences.map((exp, index) => (
             <ExperienceCard
@@ -174,10 +292,44 @@ const Internships = () => {
               </CardContent>
             </ExperienceCard>
           ))}
+          <div style={{ clear: 'both' }}></div>
         </Timeline>
+        
+        {/* Mobile Experience Cards */}
+        <MobileExperienceContainer>
+          {experiences.map((exp, index) => (
+            <MobileCard
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <MobileCardHeader>
+                <MobileCompany>{exp.company}</MobileCompany>
+                <MobilePosition>{exp.position}</MobilePosition>
+              </MobileCardHeader>
+              <MobileCardContent>
+                <MobileInfoRow>
+                  <FaCalendarAlt />
+                  <span>{exp.duration}</span>
+                </MobileInfoRow>
+                <MobileInfoRow>
+                  <FaMapMarkerAlt />
+                  <span>{exp.location}</span>
+                </MobileInfoRow>
+                <MobileDescription>
+                  {exp.description.map((item, i) => (
+                    <MobileDescriptionItem key={i}>{item}</MobileDescriptionItem>
+                  ))}
+                </MobileDescription>
+              </MobileCardContent>
+            </MobileCard>
+          ))}
+        </MobileExperienceContainer>
       </Container>
     </ExperienceSection>
   );
 };
 
-export default Internships; 
+export default Internships;

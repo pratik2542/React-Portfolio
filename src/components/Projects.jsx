@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ProjectSection = styled.section`
   min-height: 100vh;
@@ -31,10 +31,12 @@ const ProjectCard = styled(motion.div)`
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  position: relative;
 
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   }
 `;
 
@@ -67,6 +69,33 @@ const TechTag = styled.span`
   font-size: 0.875rem;
 `;
 
+// New components for hover popup
+const HoverCard = styled(motion.div)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(3px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  z-index: 10;
+  border-radius: 10px;
+`;
+
+const HoverTitle = styled.h3`
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: white;
+`;
+
+// Update projects data to include links
 const projects = [
   {
     title: "Employee Training Management System",
@@ -116,6 +145,9 @@ const projects = [
 ];
 
 const Projects = () => {
+  // State to track which project card is being hovered
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  
   return (
     <ProjectSection id="projects">
       <Container>
@@ -135,6 +167,8 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
               <ProjectContent>
                 <ProjectTitle>{project.title}</ProjectTitle>
@@ -145,6 +179,20 @@ const Projects = () => {
                   ))}
                 </TechStack>
               </ProjectContent>
+              
+              <AnimatePresence>
+                {hoveredIndex === index && (
+                  <HoverCard
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <HoverTitle>{project.title}</HoverTitle>
+                    
+                  </HoverCard>
+                )}
+              </AnimatePresence>
             </ProjectCard>
           ))}
         </ProjectGrid>
@@ -153,4 +201,4 @@ const Projects = () => {
   );
 };
 
-export default Projects; 
+export default Projects;
