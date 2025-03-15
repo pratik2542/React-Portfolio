@@ -31,10 +31,12 @@ const CertCard = styled(motion.div)`
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px); /* Increased translateY for a more pronounced pop-up */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2); /* Increased box-shadow for better visibility */
+    background-color: ${props => props.theme.cardHover || (props.theme.type === 'dark' ? '#111' : '#f0f0f0')}; /* Change background color on hover */
   }
 `;
 
@@ -128,4 +130,4 @@ const Certifications = () => {
   );
 };
 
-export default Certifications; 
+export default Certifications;

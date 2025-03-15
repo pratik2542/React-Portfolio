@@ -14,7 +14,12 @@ import ScrollToTop from './components/ScrollToTop';
 import GlobalStyles from './GlobalStyles';
 
 function App() {
-  const [theme, setTheme] = useState('dark');
+  // Randomly choose a theme on initial load
+  const getRandomTheme = () => {
+    return Math.random() > 0.5 ? 'light' : 'dark';
+  };
+
+  const [theme, setTheme] = useState(getRandomTheme());
 
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light');

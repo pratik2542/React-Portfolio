@@ -35,6 +35,12 @@ const SkillsContainer = styled(motion.div)`
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 const EducationContainer = styled(motion.div)`
@@ -42,6 +48,12 @@ const EducationContainer = styled(motion.div)`
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
 `;
 
 const SubTitle = styled.h3`
@@ -57,16 +69,28 @@ const SkillsList = styled.ul`
 const SkillItem = styled.li`
   color: ${props => props.theme.text};
   margin-bottom: 0.5rem;
+  transition: transform 0.3s ease;
+  
   &:before {
     content: "▹";
     color: ${props => props.theme.primary};
     margin-right: 0.5rem;
+  }
+  
+  &:hover {
+    transform: translateX(5px);
+    color: ${props => props.theme.primary};
   }
 `;
 
 const Education = styled.div`
   margin-bottom: 1.5rem;
   color: ${props => props.theme.text};
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateX(5px);
+  }
 `;
 
 const School = styled.h4`
@@ -127,4 +151,4 @@ const About = () => {
   );
 };
 
-export default About; 
+export default About;

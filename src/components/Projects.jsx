@@ -76,7 +76,7 @@ const HoverCard = styled(motion.div)`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.85);
+  background-color: ${props => props.theme.cardHover || (props.theme.type === 'dark' ? '#111' : '#f0f0f0')};
   backdrop-filter: blur(3px);
   display: flex;
   flex-direction: column;
@@ -92,7 +92,7 @@ const HoverCard = styled(motion.div)`
 const HoverTitle = styled.h3`
   font-size: 1.25rem;
   margin-bottom: 1rem;
-  color: white;
+   color: ${props => props.theme.cardHover || (props.theme.type === 'dark' ? '#f0f0f0' : '#111')};
 `;
 
 // Update projects data to include links
@@ -189,6 +189,11 @@ const Projects = () => {
                     transition={{ duration: 0.2 }}
                   >
                     <HoverTitle>{project.title}</HoverTitle>
+                    <TechStack>
+                      {project.tech.map((tech, i) => (
+                        <TechTag key={i}>{tech}</TechTag>
+                      ))}
+                    </TechStack>
                     
                   </HoverCard>
                 )}

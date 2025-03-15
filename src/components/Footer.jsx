@@ -60,7 +60,7 @@ const Footer = () => {
   return (
     <FooterContainer>
       <FooterContent>
-        <Copyright>© {year} Pratiksinh Makwana. All rights reserved.</Copyright>
+        <Copyright>© {year} Pratiksinh Makwana</Copyright>
         <SocialLinks>
           <SocialIcon 
             href="https://www.linkedin.com/in/pratiksinh-makwana-43488a189/" 

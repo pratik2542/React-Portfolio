@@ -5,6 +5,7 @@ import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
 import { keyframes } from '@emotion/react';
 import WhatsNew from './WhatsNew';
 import FloatingWhatsNewButton from './FloatingWhatsNewButton';
+import ThemeHighlight from './ThemeHighlight';
 
 const blink = keyframes`
   0% { opacity: 1; }
@@ -101,6 +102,8 @@ const ThemeToggle = styled.button`
   justify-content: center;
   font-size: 1.2rem;
   height: 40px;
+  width: 40px; /* Add a fixed width */
+  position: relative;
 `;
 
 const MobileMenuButton = styled.button`
@@ -278,6 +281,7 @@ const Navbar = ({ theme, toggleTheme }) => {
           <ButtonContainer>
             <ThemeToggle onClick={toggleTheme}>
               {theme === 'light' ? <FiMoon /> : <FiSun />}
+              <ThemeHighlight theme={theme} />
             </ThemeToggle>
             <MobileMenuButton onClick={toggleMenu}>
               {isMenuOpen ? <FiX /> : <FiMenu />}
