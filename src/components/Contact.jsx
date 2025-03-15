@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from 'emailjs-com';
 
 const ContactSection = styled.section`
@@ -12,13 +12,6 @@ const ContactSection = styled.section`
 const Container = styled.div`
   max-width: 800px;
   margin: 0 auto;
-`;
-
-const Title = styled(motion.h2)`
-  color: ${props => props.theme.text};
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
 `;
 
 const Form = styled(motion.form)`
@@ -168,6 +161,34 @@ const Message = styled.div`
   `}
 `;
 
+// New components for the shattering text effect
+const ScatterContainer = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  position: relative;
+  height: 3rem;
+  margin-bottom: 2rem;
+`;
+
+const OriginalTitle = styled(motion.h2)`
+  color: ${props => props.theme.text};
+  font-size: 2.5rem;
+  text-align: center;
+  opacity: ${props => props.scattered ? 0 : 1};
+  position: absolute;
+`;
+
+const ScatteredChar = styled(motion.span)`
+  display: inline-block;
+  color: ${props => props.theme.text};
+  font-size: 2.5rem;
+  font-weight: bold;
+  position: absolute;
+  transform-origin: center;
+`;
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -177,6 +198,9 @@ const Contact = () => {
   const [status, setStatus] = useState('');
   const [loading, setLoading] = useState(false);
   const [focusedField, setFocusedField] = useState(null);
+  const [scattered, setScattered] = useState(false);
+  const [scatteredChars, setScatteredChars] = useState([]);
+  const titleRef = useRef(null);
 
   useEffect(() => {
     emailjs.init(process.env.REACT_APP_EMAILJS_PUBLIC_KEY);
@@ -226,17 +250,79 @@ const Contact = () => {
     setLoading(false);
   };
 
+  const handleTitleClick = () => {
+    if (scattered) return;
+    
+    // Get text content
+    const text = "Get In Touch";
+    const chars = text.split('');
+    
+    
+    // Create scattered characters with random positions
+    const scatteredLetters = chars.map((char, index) => {
+      const randomX = Math.random() * 800 - 400; // Random X position
+      const randomY = Math.random() * 400 + 100; // Random Y position (always down)
+      const randomRotate = Math.random() * 360; // Random rotation
+      
+      return {
+        char,
+        id: index,
+        x: randomX,
+        y: randomY,
+        rotate: randomRotate
+      };
+    });
+    
+    setScatteredChars(scatteredLetters);
+    setScattered(true);
+    
+    // Reset after animation completes
+    setTimeout(() => {
+      setScattered(false);
+    }, 100);
+  };
+
   return (
     <ContactSection id="contact">
       <Container>
-        <Title
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          Get In Touch
-        </Title>
+        <ScatterContainer>
+          <OriginalTitle 
+            ref={titleRef}
+            onClick={handleTitleClick}
+            scattered={scattered}
+            style={{ cursor: 'pointer' }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            Get In Touch
+          </OriginalTitle>
+          
+          <AnimatePresence>
+            {scattered && scatteredChars.map((char) => (
+              <ScatteredChar
+                key={char.id}
+                initial={{ x: 0, y: 0, rotate: 0 }}
+                animate={{ 
+                  x: char.x, 
+                  y: char.y, 
+                  rotate: char.rotate,
+                  opacity: 0,
+                  transition: { 
+                    type: "spring",
+                    damping: 10,
+                    stiffness: 100,
+                    duration: 2
+                  }
+                }}
+                exit={{ opacity: 0 }}
+              >
+                {char.char === ' ' ? '\u00A0' : char.char}
+              </ScatteredChar>
+            ))}
+          </AnimatePresence>
+        </ScatterContainer>
         <Form
           onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 20 }}
