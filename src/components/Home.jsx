@@ -16,7 +16,7 @@ const HomeSection = styled.section`
   @media (max-width: 768px) {
     padding-top: 0;
     align-items: flex-start; /* Align to top on mobile */
-    padding-top: 20vh; /* Add space from top as percentage of viewport */
+    padding-top: 25vh; /* Increase space from top as percentage of viewport */
   }
 `;
 
@@ -38,6 +38,7 @@ const Title = styled(motion.h1)`
   
   @media (max-width: 768px) {
     font-size: 2rem;
+    margin-top: 1rem; /* Add additional top margin for the title on mobile */
   }
 `;
 
